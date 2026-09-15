@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Search Results</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+            ✦ CineMatch
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>🔎 Search Results</h1>
+
+
+    <p>
+        Results for: <strong>{{ query }}</strong>
+    </p>
+
+
+    {% if results|length > 0 %}
+
+        <div class="movie-grid">
+
+            {% for movie in results %}
+
+                <div class="movie-card">
+
+                    <a href="/movie/{{ movie.movie_id }}">
+
+                        {% if movie.poster_url %}
+
+                            <img
+                                src="{{ movie.poster_url }}"
+                                alt="{{ movie.title }}"
+                                class="recommendation-poster"
+                            >
+
+                        {% endif %}
+
+                        <h3>
+                            {{ movie.title }}
+                        </h3>
+
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <h2>No movies found.</h2>
+
+    {% endif %}
+
+</div>
+
+
+</body>
+
+</html>
